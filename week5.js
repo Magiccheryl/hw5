@@ -61,7 +61,7 @@ window.addEventListener('DOMContentLoaded', async function() {
         // Clear the old information and just display the new input
         currentElement.innerHTML = ``
   
-        // Fill the current element with the location and current weather conditions
+        // Fill the current element with the location and current weather conditions (the location, region, condition, temperature)
         currentElement.insertAdjacentHTML(`beforeend`,`
         <div class="text-center space-y-2">
         <div class="font-bold text-3xl">Current Weather for ${interpretedLocation.name}, ${interpretedLocation.region}</div>
@@ -101,7 +101,7 @@ window.addEventListener('DOMContentLoaded', async function() {
             let forecastLow = forecastDay.day.mintemp_f
             let forecastWeatherConditions = forecastDay.day.condition 
 
-            // Fill the forecast element with the forecast weather condition 
+            // Fill the forecast element with the forecast weather condition (the forecast, the date, high temperature, low temperature)
             forecastElement.insertAdjacentHTML(`beforeend`, `
             <div class="hero container max-w-screen-lg mx-auto text-center">
                 <img src="http:${dailyForecast[i].day.condition.icon}" class="inline-block">

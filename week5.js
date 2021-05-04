@@ -35,7 +35,8 @@ window.addEventListener('DOMContentLoaded', async function() {
       let days = daysInput.value
 
       // - Check to see if the user entered anything; if so:
-      if (location.length > 0) {
+      if (location.length > 0 && days.length > 0) {
+
         // - Construct a URL to call the WeatherAPI.com API
         let url = `https://api.weatherapi.com/v1/forecast.json?key=53a0155e46494151b76200952212604&q=${location}&days=3`
   
@@ -56,13 +57,16 @@ window.addEventListener('DOMContentLoaded', async function() {
   
         // Store a reference to the "current" element
         let currentElement = document.querySelector(`.current`) 
+
+        // Clear the old information and just display the new input
+        currentElement.innerHTML = ``
   
         // Fill the current element with the location and current weather conditions
         currentElement.insertAdjacentHTML(`beforeend`,`
         <div class="text-center space-y-2">
         <div class="font-bold text-3xl">Current Weather for ${interpretedLocation.name}, ${interpretedLocation.region}</div>
-        <div class="font-bold">
-          <img src="${currentWeatherConditions.icon}" class="inline-block">
+        <div class="hero container max-w-screen-lg mx-auto text-center font-bold">
+          <img src="http:${currentWeatherConditions.icon}" class="inline-block">
           <span class="temperature">${currentTemperature}</span>° 
           and
           <span class="conditions">${currentWeatherConditions.text}</span>
@@ -75,6 +79,9 @@ window.addEventListener('DOMContentLoaded', async function() {
         // Store a reference to the "forecast" element
         let forecastElement = document.querySelector(`.forecast`)
 
+        // Clear the old information and just display the new input
+        forecastElement.innerHTML = ``
+
         // Fill the forecast element with the number of days
         forecastElement.insertAdjacentHTML(`beforeend`,`
         <div class="text-center space-y-8">
@@ -83,7 +90,7 @@ window.addEventListener('DOMContentLoaded', async function() {
         `)
 
         // For the number of days provided by the end-user (the loop), display the weather forecast: the date, high and low temperature, and a summary of the conditions
-        for (let i=0; i < days.length; i++) {
+        for (let i=0; i < days; i++) {
 
             // Store each item in the Array in memory
             let forecastDay = json.forecast.forecastday[i]
@@ -96,11 +103,11 @@ window.addEventListener('DOMContentLoaded', async function() {
 
             // Fill the forecast element with the forecast weather condition 
             forecastElement.insertAdjacentHTML(`beforeend`, `
-            <div class="text-center">
-            <img src="${dailyForecast[i].day.condition.icon}" class="mx-auto">
-            <h1 class="text-2xl text-bold text-gray-500">${forecastDate}</h1>
-            <h2 class="text-xl">High ${forecastHigh}° – Low ${forecastLow}°</h2>
-            <p class="text-gray-500">${forecastWeatherConditions.text}</h1>
+            <div class="hero container max-w-screen-lg mx-auto text-center">
+                <img src="http:${dailyForecast[i].day.condition.icon}" class="inline-block">
+                <h1 class="text-2xl text-bold text-gray-500">${forecastDate}</h1>
+                <h2 class="text-xl">High ${forecastHigh}° – Low ${forecastLow}°</h2>
+                <p class="text-gray-500">${forecastWeatherConditions.text}</h1>
             </div>
           `)
             } 

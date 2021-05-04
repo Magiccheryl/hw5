@@ -85,7 +85,7 @@ window.addEventListener('DOMContentLoaded', async function() {
         // Fill the forecast element with the number of days
         forecastElement.insertAdjacentHTML(`beforeend`,`
         <div class="text-center space-y-8">
-        <div class="font-bold text-3xl">${days} Day Forecast</div>
+        <div class="font-bold text-3xl">${days}-Day Forecast</div>
         <div>
         `)
 
